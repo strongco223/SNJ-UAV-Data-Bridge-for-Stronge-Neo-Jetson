@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  mavros:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host    # ✅ 這行讓 build 階段共用主機網路
+    container_name: mavros
+    network_mode: host
+    restart: "no"
+    command: >  
+      bash -c "source /opt/ros/humble/setup.bash && ros2 run mavros mavros_node --ros-args -p fcu_url:=udp://0.0.0.0:14554@"

@@ -1,0 +1,18 @@
+services:
+  imageserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    container_name: imageserver
+    network_mode: host
+    ipc: host
+    restart: "no"
+    runtime: nvidia
+    volumes:
+      - ./workspace:/workspace
+    group_add:
+      - video
+    tty: true
+    privileged: true
+

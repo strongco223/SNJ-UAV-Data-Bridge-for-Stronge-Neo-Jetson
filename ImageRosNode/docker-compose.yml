@@ -1,0 +1,15 @@
+services:
+  camera:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host    # ✅ 這行讓 build 階段共用主機網路
+    container_name: ros_camera
+    network_mode: host
+    devices:
+      - /dev/video0:/dev/video0
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    volumes:
+      - ./workspace:/workspace
+    privileged: true

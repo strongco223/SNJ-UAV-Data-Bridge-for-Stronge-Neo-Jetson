@@ -1,0 +1,26 @@
+services:
+  camera:
+    build:
+      context: ./ImageRosNode
+      dockerfile: Dockerfile
+      network: host    # ✅ 這行讓 build 階段共用主機網路
+    container_name: ros_camera
+    network_mode: host
+    devices:
+      - /dev/video0:/dev/video0
+    environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    volumes:
+      - ./ImageRosNode/workspace:/workspace
+    privileged: true
+  
+  mavros:
+    build:
+      context: ./MavRosNode
+      dockerfile: Dockerfile
+      network: host    # ✅ 這行讓 build 階段共用主機網路
+    container_name: mavros
+    network_mode: host
+    restart: "no"
+    command: >  
+      bash -c "source /opt/ros/humble/setup.bash && ros2 run mavros mavros_node --ros-args -p fcu_url:=udp://0.0.0.0:14554@"

@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  imageros:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host    # ✅ 這行讓 build 階段共用主機網路
+    container_name: imageros
+    network_mode: host
+    restart: "no"
+    ipc: host
+    volumes:
+      - ./workspace:/workspace
+    tty: true
+    privileged: true
