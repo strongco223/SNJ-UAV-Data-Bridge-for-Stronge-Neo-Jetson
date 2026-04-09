@@ -4,7 +4,9 @@
 
 ## Clone
 ```bash
-git clone <url>
+git clone https://github.com/strongco223/SNJ-UAV-Data-Bridge-for-Stronge-Neo-Jetson.git
+
+cd SNJ-UAV-Data-Bridge-for-Stronge-Neo-Jetson
 ```
 ## Build
 ```bash
